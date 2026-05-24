@@ -1,0 +1,4 @@
+echo "novo_hevc_env/" >> ~/Documents/hevc/.gitignore
+echo "hevc_env/" >> ~/Documents/hevc/.gitignore
+echo "__pycache__/" >> ~/Documents/hevc/.gitignore
+echo "*.pyc" >> ~/Documents/hevc/.gitignore
