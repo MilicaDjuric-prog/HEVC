@@ -28,7 +28,8 @@ class KompresijaNit(QThread):
             codec_mapa = {
                 'HEVC': 'libx265',
                 'H.264': 'libx264',
-                'MPEG-2': 'mpeg2video'
+                'MPEG-2': 'mpeg2video',
+                'VP9': 'libvpx-vp9'
             }
             codec = codec_mapa[self.parametri['format']]
 

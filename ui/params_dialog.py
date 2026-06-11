@@ -20,7 +20,7 @@ class ParamsDialog(QDialog):
         format_grupa = QGroupBox("Format izlaza")
         format_raspored = QVBoxLayout()
         self.format_combo = QComboBox()
-        self.format_combo.addItems(['HEVC', 'H.264', 'MPEG-2'])
+        self.format_combo.addItems(['HEVC', 'H.264', 'MPEG-2', 'VP9'])
         format_raspored.addWidget(self.format_combo)
         format_grupa.setLayout(format_raspored)
 
