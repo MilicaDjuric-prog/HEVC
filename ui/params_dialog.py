@@ -48,6 +48,18 @@ class ParamsDialog(QDialog):
         crf_raspored.addLayout(crf_vrednost_raspored)
         crf_grupa.setLayout(crf_raspored)
 
+    # Preset brzine
+        preset_grupa = QGroupBox("Brzina enkodovanja")
+        preset_raspored = QVBoxLayout() 
+        preset_opis = QLabel("Brže enkodovanje = veći fajl, sporije = manji fajl")
+        preset_opis.setStyleSheet("color: gray; font-size: 11px;")
+        self.preset_combo = QComboBox()
+        self.preset_combo.addItems(['Brzo', 'Srednje', 'Sporo'])
+        self.preset_combo.setCurrentText('Srednje')
+        preset_raspored.addWidget(preset_opis)
+        preset_raspored.addWidget(self.preset_combo)
+        preset_grupa.setLayout(preset_raspored)
+
         # Rezolucija
         rezolucija_grupa = QGroupBox("Rezolucija izlaza")
         rezolucija_raspored = QVBoxLayout()
@@ -73,6 +85,7 @@ class ParamsDialog(QDialog):
         # Dodaj sve u glavni raspored
         glavni_raspored.addWidget(format_grupa)
         glavni_raspored.addWidget(crf_grupa)
+        glavni_raspored.addWidget(preset_grupa)  
         glavni_raspored.addWidget(rezolucija_grupa)
         glavni_raspored.addLayout(dugmad_raspored)
 
@@ -82,8 +95,15 @@ class ParamsDialog(QDialog):
         self.crf_label.setText(f"CRF: {vrednost}")
 
     def uzmi_parametre(self):
-        return {
-            'format': self.format_combo.currentText(),
-            'crf': self.crf_slider.value(),
-            'rezolucija': self.rezolucija_combo.currentText()
-        }
+         preset_mapa = {
+        'Brzo': 'fast',
+        'Srednje': 'medium',
+        'Sporo': 'slow'
+    }
+         return {
+        'format': self.format_combo.currentText(),
+        'crf': self.crf_slider.value(),
+        'rezolucija': self.rezolucija_combo.currentText(),
+        'preset': preset_mapa[self.preset_combo.currentText()]
+    }
+    

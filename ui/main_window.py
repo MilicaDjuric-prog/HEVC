@@ -194,7 +194,17 @@ class GlavniProzor(QMainWindow):
         if dijalog.exec() != QDialog.DialogCode.Accepted:
             return
 
-        parametri = dijalog.uzmi_parametre()
+        parametri = dijalog.uzmi_parametre() 
+
+       # Provera kompatibilnosti preseta
+        if parametri['preset'] != 'medium' and parametri['format'] in ['MPEG-2', 'VP9']:
+          QMessageBox.warning(
+            self,
+            "Nekompatibilni parametri",
+            f"Format {parametri['format']} ne podržava podešavanje brzine enkodovanja.\n"
+            "Molimo izaberite format HEVC ili H.264, ili postavite brzinu na Srednje."
+          )
+          return
 
         self.kompresuj_dugme.setEnabled(False)
         self.progres_bar.setValue(0)

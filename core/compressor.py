@@ -35,14 +35,26 @@ class KompresijaNit(QThread):
 
             self.progres.emit(10)
 
-            (
-                ffmpeg
-                .output(stream, self.izlaz,
-                        vcodec=codec,
-                        crf=self.parametri['crf'])
-                .overwrite_output()
-                .run(quiet=True)
-            )
+            
+            if self.parametri['format'] in ['HEVC', 'H.264']:
+                (
+                    ffmpeg
+                    .output(stream, self.izlaz,
+                            vcodec=codec,
+                            crf=self.parametri['crf'],
+                            preset=self.parametri['preset'])
+                    .overwrite_output()
+                    .run(quiet=True)
+                )
+            else:
+                (
+                    ffmpeg
+                    .output(stream, self.izlaz,
+                            vcodec=codec,
+                            crf=self.parametri['crf'])
+                    .overwrite_output()
+                    .run(quiet=True)
+                )
 
             self.progres.emit(100)
 
